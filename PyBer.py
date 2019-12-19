@@ -339,3 +339,87 @@ print("Summary Statistics")
 urban_drivers.describe()
 
 # %%
+# Get the sum of the fares for each city type.
+sum_fares_by_type = pyber_data_df.groupby(["type"]).sum()["fare"]
+sum_fares_by_type
+
+# %%
+# Get the sum of all the fares.
+total_fares = pyber_data_df["fare"].sum()
+total_fares
+
+# %%
+# Calculate the percentage of fare for each city type.
+type_percents = 100 * sum_fares_by_type / total_fares
+type_percents
+
+# %%
+# Calculate the percentage of fare for each city type.
+type_percents = 100 * pyber_data_df.groupby(["type"]).sum()["fare"] / pyber_data_df["fare"].sum()
+type_percents
+
+# %%
+# Build the percentage of fares by city type pie chart.
+plt.pie(type_percents, labels=["Rural", "Suburban", "Urban"])
+plt.show()
+
+# %%
+# Build the percentage of fares by city type pie chart.
+plt.pie(type_percents,
+    labels=["Rural", "Suburban", "Urban"],
+    colors=["gold", "lightskyblue", "lightcoral"],
+    explode=[0, 0, 0.1],
+    autopct='%1.1f%%',
+    shadow=True, startangle=150)
+plt.title("% of Total Fares by City Type")
+# Show Figure
+plt.show()
+
+# %%
+# Import mpl to change the plot configurations using rcParams.
+import matplotlib as mpl
+# Build Pie Chart
+plt.subplots(figsize=(10, 6))
+plt.pie(type_percents,
+    labels=["Rural", "Suburban", "Urban"],
+    colors=["gold", "lightskyblue", "lightcoral"],
+    explode=[0, 0, 0.1],
+    autopct='%1.1f%%',
+    shadow=True, startangle=150)
+plt.title("% of Total Fares by City Type")
+# Change the default font size from 10 to 14.
+mpl.rcParams['font.size'] = 14
+# Save Figure
+plt.savefig("analysis/Fig5.png")
+# Show Figure
+plt.show()
+
+# %%
+pyber_data_df.groupby(["type"])
+
+# %%
+pyber_data_df["ride_id"].count()
+
+# %%
+# Calculate the percentage of rides for each city type.
+ride_percents = 100 * pyber_data_df.groupby(["type"]).count()["ride_id"] / pyber_data_df["ride_id"].count()
+ride_percents
+
+# %%
+# Build percentage of rides by city type pie chart.
+plt.subplots(figsize=(10, 6))
+plt.pie(ride_percents,
+    labels=["Rural", "Suburban", "Urban"],
+    colors=["gold", "lightskyblue", "lightcoral"],
+    explode=[0, 0, 0.1],
+    autopct='%1.1f%%',
+    shadow=True, startangle=150)
+plt.title("% of Total Rides by City Type")
+# Change the default font size from 10 to 14.
+mpl.rcParams['font.size'] = 14
+# Save Figure
+plt.savefig("analysis/Fig6.png")
+# Show Figure
+plt.show()
+
+# %%
