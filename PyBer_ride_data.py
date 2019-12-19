@@ -44,4 +44,5 @@ fig, ax = plt.subplots()
 ax.bar(x_axis, y_axis, yerr=stdev, capsize=3)
 plt.show()
 
+
 # %%
